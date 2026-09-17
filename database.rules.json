@@ -1,0 +1,34 @@
+{
+  "rules": {
+    "calendar": {
+      ".read": true,
+      ".indexOn": ["booking_date"],
+      ".write": "auth != null && auth.token.admin === true",
+      "$id": {
+        ".write": "(!data.exists() && newData.child('status').val() === 'pending' && newData.child('booking_date').isString()) || (auth != null && auth.token.admin === true)"
+      }
+    },
+    "calendar_furniture": {
+      ".read": true,
+      ".indexOn": ["booking_date"],
+      ".write": "auth != null && auth.token.admin === true",
+      "$id": {
+        ".write": "(!data.exists() && newData.child('status').val() === 'pending' && newData.child('booking_date').isString()) || (auth != null && auth.token.admin === true)"
+      }
+    },
+    "bookings": {
+      ".read": "auth != null && auth.token.admin === true",
+      "$id": {
+        ".write": "(!data.exists() && newData.child('status').val() === 'pending' && newData.child('customer_name').isString() && newData.child('phone').isString() && newData.child('booking_date').isString()) || (auth != null && auth.token.admin === true)"
+      }
+    },
+    "pricing": {
+      ".read": true,
+      ".write": "auth != null && auth.token.admin === true"
+    },
+    "siteContent": {
+      ".read": true,
+      ".write": "auth != null && auth.token.admin === true"
+    }
+  }
+}

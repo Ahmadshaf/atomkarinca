@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="tr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Koltuk / Sandalye / Yatak Rezervasyon | ATOM</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css"></head>
+<body>
+<div class="site-loader"><div class="loader-clean"><span class="bubble b1"></span><span class="bubble b2"></span><span class="bubble b3"></span><div class="loader-icon">🫧🧹</div></div><div class="loader-text">ATOM hazırlanıyor</div></div>
+<header class="topbar"><a class="brand" href="index.html"><img class="brand-ant" src="atom-karinca-mascot.png" alt="Karınca maskotu"><span>ATOM <span class="brand-karinca">KARINCA</span></span></a><nav><a href="index.html">Ana Sayfa</a><a href="rezervasyon.html">Ev / Daire Rezervasyon</a><a class="nav-cta" href="mobilya-rezervasyon.html">Koltuk · Sandalye · Yatak</a></nav></header>
+<section class="page-head"><span class="eyebrow">Mobilya temizliği</span><h1>Koltuk, sandalye ve yatak</h1><p>Bu takvim yalnızca koltuk, sandalye ve yatak temizliği içindir. Ev / daire rezervasyonundan tamamen ayrıdır. Yeşil uygun, turuncu incelemede, kırmızı dolu.</p></section>
+<section class="booking-section"><div class="booking-layout">
+<div><div class="calendar-box"><div class="calendar-head"><button id="prevMonth">‹</button><strong id="monthLabel"></strong><button id="nextMonth">›</button></div><div class="weekdays"><span>Pzt</span><span>Sal</span><span>Çar</span><span>Per</span><span>Cum</span><span>Cmt</span><span>Paz</span></div><div class="calendar-grid" id="calendarGrid"></div><div class="legend"><span><i class="available-dot"></i>Uygun</span><span><i class="pending-dot"></i>İncelemede</span><span><i class="booked-dot"></i>Dolu</span><span><i class="half-dot"></i>Yarım gün</span></div></div></div>
+<form class="booking-form" id="bookingForm">
+<h3>Mobilya rezervasyonu</h3>
+<div class="live-price"><small>Fiyat</small><strong id="estimatedPrice">Seçimlerinizi yapın</strong><small>Fiyat seçimlerinize göre hesaplanır.</small></div>
+<input type="hidden" id="selectedDate"><div class="selected-date" id="selectedDateText">Henüz tarih seçilmedi</div>
+<div class="form-row"><label>Ad Soyad<input name="customer_name" required autocomplete="name" placeholder="Adınız ve soyadınız"></label><label>Telefon<input name="phone" required autocomplete="tel" placeholder="05xx xxx xx xx"></label></div>
+<label>Adres<textarea name="address" required rows="3" placeholder="Mahalle, sokak, bina ve daire bilgisi"></textarea></label>
+<label>Hizmet Türü<select name="furniture_type" id="furnitureTypeSelect" required>
+<option value="">Seçiniz</option>
+<option value="Koltuk Temizliği">Koltuk Temizliği</option>
+<option value="Sandalye">Sandalye</option>
+<option value="Yatak">Yatak</option>
+</select></label>
+<div class="form-row" id="quantityRow" style="display:none">
+<label>Adet (zorunlu)<input name="quantity" id="quantityInput" type="number" min="1" max="50" step="1" value="1" placeholder="Örn: 3"><small class="field-hint">Sandalye / yatak: adet × birim fiyat = toplam (ör. 3 × 50 = 150 TL)</small></label>
+<label style="visibility:hidden">.</label>
+</div>
+<label>Saat / Dilim<select name="time_slot" id="timeSlotSelect" required>
+<option value="full">Tam gün</option>
+<option value="morning">Sabah (12:00'ye kadar)</option>
+<option value="afternoon">Öğleden sonra (12:00 sonrası)</option>
+</select></label>
+<label>Ek İstekler<textarea name="notes" rows="4" placeholder="Koltuk modeli, leke, kumaş tipi vb."></textarea></label>
+<label class="consent"><input type="checkbox" required> İletişim ve rezervasyon bilgilerimin işlenmesini kabul ediyorum.</label>
+<button class="btn primary full" type="submit" id="submitBooking">Rezervasyon Talebi Gönder</button>
+<p class="form-message" id="formMessage"></p><div id="successPrice"></div>
+</form></div></section>
+<footer><div><strong class="footer-brand"><img class="footer-ant" src="atom-karinca-mascot.png" alt="Karınca maskotu">ATOM</strong><p>Temizlikte güven, evinizde huzur.</p></div><div><strong>İletişim</strong><p>Telefon: +90 543 123 10 41<br>E-posta: yesimarslan@gmail.com</p></div><div><strong>Çalışma Saatleri</strong><p>Pazartesi - Cumartesi<br>08:00 - 19:00</p></div></footer>
+<script src="config.js"></script><script src="pricing.js"></script><script src="effects.js"></script><script type="module" src="mobilya-booking.js"></script></body></html>

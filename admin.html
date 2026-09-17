@@ -1,0 +1,172 @@
+<!doctype html>
+<html lang="tr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Yönetici Paneli | ATOM</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="admin-page">
+  <div class="admin-shell">
+    <div id="adminGate" class="login-card">
+      <img class="admin-mascot" src="atom-karinca-mascot.png" alt="ATOM karınca maskotu">
+      <span class="eyebrow">Yönetici</span>
+      <h1>Kontrol ediliyor...</h1>
+      <p class="note">Yönetici oturumu doğrulanıyor.</p>
+    </div>
+
+    <div id="adminLoggedIn" hidden>
+      <div class="admin-top">
+        <div>
+          <span class="eyebrow">Yönetici paneli</span>
+          <h1>ATOM KARINCA</h1>
+          <p class="note">Soldaki menüden yönetmek istediğiniz bölümü seçin.</p>
+        </div>
+        <button class="btn ghost" id="logoutBtn">Çıkış</button>
+      </div>
+
+      <div class="admin-dashboard">
+        <aside class="admin-side-menu" aria-label="Yönetici menüsü">
+          <button class="admin-menu-btn active" data-panel="bookingsPanel">📅 <span>Rezervasyonlar</span></button>
+          <button class="admin-menu-btn" data-panel="pricesPanel">💰 <span>Fiyatlar</span></button>
+          <button class="admin-menu-btn" data-panel="teamPanel">👥 <span>Ekip</span></button>
+          <button class="admin-menu-btn" data-panel="placesPanel">🏠 <span>Temizlenecek Yerler</span></button>
+          <button class="admin-menu-btn" data-panel="servicesPanel">🧽 <span>Hizmet Türleri</span></button>
+          <button class="admin-menu-btn" data-panel="calendarPanel">🗓️ <span>Takvim Ev/Daire</span></button>
+          <button class="admin-menu-btn" data-panel="furnitureCalendarPanel">🛋️ <span>Takvim Mobilya</span></button>
+        </aside>
+
+        <main class="admin-panel-content">
+          <section class="admin-content-panel active" id="bookingsPanel">
+            <div class="admin-section-title"><span class="eyebrow">Rezervasyonlar</span><h2>Müşteri talepleri</h2></div>
+            <div class="admin-search"><input id="bookingSearch" placeholder="Ad veya telefon numarası ile ara..."></div>
+            <div class="admin-filters">
+              <button class="active" data-filter="pending">Bekleyen</button>
+              <button data-filter="approved">Onaylı</button>
+              <button data-filter="rejected">Reddedilen</button>
+              <button data-filter="all">Tümü</button>
+            </div>
+            <p id="adminCount" class="note"></p>
+            <div id="adminBookings" class="admin-bookings"></div>
+          </section>
+
+          <section class="admin-content-panel" id="pricesPanel">
+            <div class="admin-section-title"><span class="eyebrow">Fiyatlar</span><h2>Rezervasyon hesap fiyatları</h2></div>
+            <p class="note">Bu fiyatlar rezervasyon formundaki otomatik hesaplamada kullanılır.</p>
+            <div class="admin-price-grid">
+              <label>1+1 <input id="price_1_1" type="number" min="0" step="50"></label>
+              <label>2+1 <input id="price_2_1" type="number" min="0" step="50"></label>
+              <label>3+1 <input id="price_3_1" type="number" min="0" step="50"></label>
+              <label>4+1 <input id="price_4_1" type="number" min="0" step="50"></label>
+              <label>4+1 Dubleks <input id="price_duplex" type="number" min="0" step="50"></label>
+              <label>Koltuk Yıkama <input id="price_sofa" type="number" min="0" step="50"></label>
+              <label>Sandalye <input id="price_chair" type="number" min="0" step="10"></label>
+              <label>Yatak <input id="price_bed" type="number" min="0" step="50"></label>
+            </div>
+            <button class="btn primary" id="savePricesBtn">Hesap Fiyatlarını Kaydet</button>
+            <span id="priceSaveMessage" class="note"></span>
+
+            <div class="admin-section-title" style="margin-top:36px">
+              <span class="eyebrow">Ana sayfa</span>
+              <h2>Fiyat Kartları (Çerçeveler)</h2>
+            </div>
+            <p class="note">Ana sitedeki kartları buradan yönetin. Başlık, fiyat, not ekleyin. Bozuk görünüyorsa "Varsayılan kartları yükle"ye basın.</p>
+            <div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:16px;align-items:center">
+              <div class="team-admin-add" style="flex:1;margin:0">
+                <input id="newCardTitle" type="text" maxlength="60" placeholder="Yeni kart başlığı">
+                <button class="btn primary" id="addCardBtn">Yeni Kart Ekle</button>
+              </div>
+              <button class="btn" type="button" id="resetCardsBtn" style="white-space:nowrap">Varsayılan kartları yükle</button>
+            </div>
+            <p id="cardsSaveMessage" class="note"></p>
+            <div id="adminCardsList"></div>
+          </section>
+
+          <section class="admin-content-panel" id="teamPanel">
+            <div class="admin-section-title"><span class="eyebrow">Ekip</span><h2>Ekip üyelerini yönet</h2></div>
+            <p class="note">Buradan ekip üyesi ekleyebilir veya çıkarabilirsiniz. Değişiklikler ana sitede anlık görünür.</p>
+
+            <div class="team-admin-add">
+              <input id="newTeamName" type="text" maxlength="60" placeholder="Yeni ekip üyesinin adı">
+              <button class="btn primary" id="addTeamBtn">Ekle</button>
+            </div>
+            <p id="teamSaveMessage" class="note"></p>
+            <div id="adminTeamList" class="admin-team-list"></div>
+          </section>
+
+          <section class="admin-content-panel" id="placesPanel">
+            <div class="admin-section-title"><span class="eyebrow">Temizlenecek Yerler</span><h2>Yer listesini yönet</h2></div>
+            <p class="note">Buradan rezervasyon formundaki "Temizlenecek Yer" seçeneklerini ekleyebilir veya silebilirsiniz. Değişiklikler anlık yansır.</p>
+
+            <div class="team-admin-add">
+              <input id="newPlaceName" type="text" maxlength="60" placeholder="Yeni yer adı (örn: Depo, Mağaza)">
+              <button class="btn primary" id="addPlaceBtn">Ekle</button>
+            </div>
+            <p id="placeSaveMessage" class="note"></p>
+            <div id="adminPlacesList" class="admin-team-list"></div>
+          </section>
+
+          <section class="admin-content-panel" id="servicesPanel">
+            <div class="admin-section-title"><span class="eyebrow">Hizmet Türleri</span><h2>Hizmet listesini yönet</h2></div>
+            <p class="note">Rezervasyon formundaki "Hizmet Türü" seçeneklerini buradan ekleyip çıkarabilirsiniz.</p>
+            <div class="team-admin-add">
+              <input id="newServiceName" type="text" maxlength="80" placeholder="Yeni hizmet adı">
+              <button class="btn primary" id="addServiceBtn">Ekle</button>
+            </div>
+            <p id="serviceSaveMessage" class="note"></p>
+            <div id="adminServicesList" class="admin-team-list"></div>
+          </section>
+
+          <section class="admin-content-panel" id="calendarPanel">
+            <div class="admin-section-title"><span class="eyebrow">Takvim</span><h2>Yarım gün / dilim yönetimi</h2></div>
+            <p class="note">Günleri sabah (12:00'ye kadar) ve öğleden sonra olarak işaretleyebilirsiniz. Kırmızı dolu, yeşil boş, turuncu incelemede demektir.</p>
+            <div class="admin-calendar-box">
+              <div class="calendar-box" style="box-shadow:none;padding:16px">
+                <div class="calendar-head"><button type="button" id="adminPrevMonth">‹</button><strong id="adminMonthLabel"></strong><button type="button" id="adminNextMonth">›</button></div>
+                <div class="weekdays"><span>Pzt</span><span>Sal</span><span>Çar</span><span>Per</span><span>Cum</span><span>Cmt</span><span>Paz</span></div>
+                <div class="calendar-grid" id="adminCalendarGrid"></div>
+                <div class="legend"><span><i class="available-dot"></i>Uygun</span><span><i class="pending-dot"></i>İncelemede</span><span><i class="booked-dot"></i>Dolu</span><span><i class="half-dot"></i>Yarım gün</span></div>
+              </div>
+              <div id="adminSelectedDay" class="admin-selected-day">Bir gün seçin</div>
+              <div class="admin-slot-actions">
+                <button type="button" class="block-morning" id="blockMorningBtn">Sabahı Dolu Yap</button>
+                <button type="button" class="free-morning" id="freeMorningBtn">Sabahı Boşalt</button>
+                <button type="button" class="block-afternoon" id="blockAfternoonBtn">Öğleden Sonrayı Dolu Yap</button>
+                <button type="button" class="free-afternoon" id="freeAfternoonBtn">Öğleden Sonrayı Boşalt</button>
+              </div>
+              <p id="calendarAdminMsg" class="note"></p>
+            </div>
+          </section>
+
+          <section class="admin-content-panel" id="furnitureCalendarPanel">
+            <div class="admin-section-title"><span class="eyebrow">Mobilya takvimi</span><h2>Koltuk / Sandalye / Yatak</h2></div>
+            <p class="note">Bu takvim yalnızca koltuk, sandalye ve yatak rezervasyonları içindir. Ev/daire takviminden tamamen ayrıdır.</p>
+            <div class="admin-calendar-box">
+              <div class="calendar-box" style="box-shadow:none;padding:16px">
+                <div class="calendar-head"><button type="button" id="furnPrevMonth">‹</button><strong id="furnMonthLabel"></strong><button type="button" id="furnNextMonth">›</button></div>
+                <div class="weekdays"><span>Pzt</span><span>Sal</span><span>Çar</span><span>Per</span><span>Cum</span><span>Cmt</span><span>Paz</span></div>
+                <div class="calendar-grid" id="furnCalendarGrid"></div>
+                <div class="legend"><span><i class="available-dot"></i>Uygun</span><span><i class="pending-dot"></i>İncelemede</span><span><i class="booked-dot"></i>Dolu</span><span><i class="half-dot"></i>Yarım gün</span></div>
+              </div>
+              <div id="furnSelectedDay" class="admin-selected-day">Bir gün seçin</div>
+              <div class="admin-slot-actions">
+                <button type="button" class="block-morning" id="furnBlockMorningBtn">Sabahı Dolu Yap</button>
+                <button type="button" class="free-morning" id="furnFreeMorningBtn">Sabahı Boşalt</button>
+                <button type="button" class="block-afternoon" id="furnBlockAfternoonBtn">Öğleden Sonrayı Dolu Yap</button>
+                <button type="button" class="free-afternoon" id="furnFreeAfternoonBtn">Öğleden Sonrayı Boşalt</button>
+              </div>
+              <p id="furnCalendarAdminMsg" class="note"></p>
+            </div>
+          </section>
+        </main>
+      </div>
+    </div>
+    </div>
+  </div>
+  <script src="config.js"></script>
+  <script type="module" src="admin.js"></script>
+</body>
+</html>
