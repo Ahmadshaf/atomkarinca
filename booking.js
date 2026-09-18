@@ -171,15 +171,16 @@ function updateEstimate(){
   const room=fd.get('room_count');
   const service=fd.get('service_type');
   const bathroom=fd.get('bathroom_count');
+  const priceEl=el('estimatedPrice');
 
   if(!property || !room || !service){
-    el('estimatedPrice').textContent='Seçimlerinizi yapın';
+    if(priceEl) priceEl.textContent='Seçimlerinizi yapın';
     state.lastEstimate=null;
     return;
   }
 
   state.lastEstimate=window.calculateEvaPrice(property,room,service,null,bathroom);
-  el('estimatedPrice').textContent=window.formatTL(state.lastEstimate.total);
+  if(priceEl) priceEl.textContent=window.formatTL(state.lastEstimate.total);
 }
 
 ['property_type','room_count','service_type','bathroom_count'].forEach(name=>{
@@ -304,7 +305,7 @@ el('bookingForm').onsubmit=async e=>{
     state.selected=null;
     state.selectedSlot='full';
     state.lastEstimate=null;
-    el('estimatedPrice').textContent='Seçimlerinizi yapın';
+    if(el('estimatedPrice')) el('estimatedPrice').textContent='Seçimlerinizi yapın';
     el('selectedDate').value='';
     el('selectedDateText').textContent='Henüz tarih seçilmedi';
     render();

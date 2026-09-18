@@ -153,7 +153,7 @@ function updateEstimate() {
   const type = el('furnitureTypeSelect')?.value;
   const qty = getQuantity();
   const priceEl = el('estimatedPrice');
-  if (!priceEl) return;
+  if (!priceEl) return; // fiyat kutusu yok — listeden görüyorlar
   if (!type) {
     priceEl.textContent = 'Seçimlerinizi yapın';
     return;
@@ -313,7 +313,7 @@ el('bookingForm').onsubmit = async e => {
     if (form.elements.time_slot) form.elements.time_slot.value = 'full';
     state.selected = null;
     state.selectedSlot = 'full';
-    el('estimatedPrice').textContent = 'Seçimlerinizi yapın';
+    if (el('estimatedPrice')) el('estimatedPrice').textContent = 'Seçimlerinizi yapın';
     el('selectedDate').value = '';
     el('selectedDateText').textContent = 'Henüz tarih seçilmedi';
     render();
