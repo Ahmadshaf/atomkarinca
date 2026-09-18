@@ -1,9 +1,6 @@
 <!doctype html>
 <html lang="tr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Koltuk, Sandalye ve Yatak Yıkama | ATOM KARINCA Eskişehir</title>
-<link rel="icon" type="image/png" href="favicon.png">
-<link rel="apple-touch-icon" href="favicon.png">
-<meta name="description" content="Eskişehir'de koltuk yıkama, sandalye ve yatak temizliği. Online rezervasyon. ATOM KARINCA.">
+<title>Koltuk / Sandalye / Yatak Rezervasyon | ATOM</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="styles.css"></head>
@@ -15,6 +12,7 @@
 <div><div class="calendar-box"><div class="calendar-head"><button id="prevMonth">‹</button><strong id="monthLabel"></strong><button id="nextMonth">›</button></div><div class="weekdays"><span>Pzt</span><span>Sal</span><span>Çar</span><span>Per</span><span>Cum</span><span>Cmt</span><span>Paz</span></div><div class="calendar-grid" id="calendarGrid"></div><div class="legend"><span><i class="available-dot"></i>Uygun</span><span><i class="pending-dot"></i>İncelemede</span><span><i class="booked-dot"></i>Dolu</span><span><i class="half-dot"></i>Yarım gün</span></div></div></div>
 <form class="booking-form" id="bookingForm">
 <h3>Mobilya rezervasyonu</h3>
+<div class="live-price"><small>Fiyat</small><strong id="estimatedPrice">Seçimlerinizi yapın</strong><small>Fiyat seçimlerinize göre hesaplanır.</small></div>
 <input type="hidden" id="selectedDate"><div class="selected-date" id="selectedDateText">Henüz tarih seçilmedi</div>
 <div class="form-row"><label>Ad Soyad<input name="customer_name" required autocomplete="name" placeholder="Adınız ve soyadınız"></label><label>Telefon<input name="phone" required autocomplete="tel" placeholder="05xx xxx xx xx"></label></div>
 <label>Adres<textarea name="address" required rows="3" placeholder="Mahalle, sokak, bina ve daire bilgisi"></textarea></label>

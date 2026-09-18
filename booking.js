@@ -171,16 +171,15 @@ function updateEstimate(){
   const room=fd.get('room_count');
   const service=fd.get('service_type');
   const bathroom=fd.get('bathroom_count');
-  const priceEl=el('estimatedPrice');
 
   if(!property || !room || !service){
-    if(priceEl) priceEl.textContent='Seçimlerinizi yapın';
+    el('estimatedPrice').textContent='Seçimlerinizi yapın';
     state.lastEstimate=null;
     return;
   }
 
   state.lastEstimate=window.calculateEvaPrice(property,room,service,null,bathroom);
-  if(priceEl) priceEl.textContent=window.formatTL(state.lastEstimate.total);
+  el('estimatedPrice').textContent=window.formatTL(state.lastEstimate.total);
 }
 
 ['property_type','room_count','service_type','bathroom_count'].forEach(name=>{
@@ -287,7 +286,6 @@ el('bookingForm').onsubmit=async e=>{
 
     el('successPrice').innerHTML=
       `<div class="success-price">
-        Fiyatınız: ${window.formatTL(estimate.total)}<br>
         <small>${pretty(booking.booking_date)} · ${slotLabel(timeSlot)}</small><br>
         <small>Rezervasyon yönetici onayına gönderildi.</small><br><br>
         <a class="btn primary" href="${whatsappUrl}" target="_blank" rel="noopener">
@@ -305,7 +303,7 @@ el('bookingForm').onsubmit=async e=>{
     state.selected=null;
     state.selectedSlot='full';
     state.lastEstimate=null;
-    if(el('estimatedPrice')) el('estimatedPrice').textContent='Seçimlerinizi yapın';
+    el('estimatedPrice').textContent='Seçimlerinizi yapın';
     el('selectedDate').value='';
     el('selectedDateText').textContent='Henüz tarih seçilmedi';
     render();

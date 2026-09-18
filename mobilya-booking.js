@@ -153,7 +153,7 @@ function updateEstimate() {
   const type = el('furnitureTypeSelect')?.value;
   const qty = getQuantity();
   const priceEl = el('estimatedPrice');
-  if (!priceEl) return; // fiyat kutusu yok — listeden görüyorlar
+  if (!priceEl) return;
   if (!type) {
     priceEl.textContent = 'Seçimlerinizi yapın';
     return;
@@ -299,7 +299,6 @@ el('bookingForm').onsubmit = async e => {
       : formatMoney(estimate.total);
     el('successPrice').innerHTML =
       `<div class="success-price">
-        Fiyatınız: ${priceDetail}<br>
         <small>${pretty(booking.booking_date)} · ${slotLabel(timeSlot)} · ${furnitureType}</small><br>
         <small>Rezervasyon yönetici onayına gönderildi.</small><br><br>
         <a class="btn primary" href="${whatsappUrl}" target="_blank" rel="noopener">WhatsApp'tan Gönder</a>
@@ -313,7 +312,7 @@ el('bookingForm').onsubmit = async e => {
     if (form.elements.time_slot) form.elements.time_slot.value = 'full';
     state.selected = null;
     state.selectedSlot = 'full';
-    if (el('estimatedPrice')) el('estimatedPrice').textContent = 'Seçimlerinizi yapın';
+    el('estimatedPrice').textContent = 'Seçimlerinizi yapın';
     el('selectedDate').value = '';
     el('selectedDateText').textContent = 'Henüz tarih seçilmedi';
     render();
